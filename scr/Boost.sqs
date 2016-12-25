@@ -1,0 +1,52 @@
+_plane = _this select 0
+_Fuel = fuel (_plane)
+_plane animate ["ABSwitch",1]
+?(fuel (_plane) < 0.01): exit
+
+_Speed = 10
+
+#CheckPos
+?not(alive _plane): exit
+~0.1
+?(_plane animationphase "ABSwitch" == 0): goto "Exit"
+
+_vel = velocity _plane;
+_dir = direction _plane;
+_Velx = velocity _plane select 0
+_Velz = velocity _plane select 1
+_Vely = velocity _plane select 2
+_Fuel = fuel (_plane)
+
+#Acc
+~0.1
+?(_Checkspeed > 25): goto "Dec"
+_Speed = _Speed + 1
+_Checkspeed = _Speed
+_Fuel = _Fuel - 0.001
+_plane setfuel _Fuel
+goto "Boost"
+
+#Dec
+_speed = _speed - 4
+?(_Speed < 2): goto "Exit"
+goto "Boost"
+
+#Boost
+~0.1
+_AnimAfterburner = _Speed / 25
+_plane animate ["AfterburnerL",_AnimAfterburner];
+_plane animate ["AfterburnerR",_AnimAfterburner];
+_plane animate ["AfterburnerL2",_AnimAfterburner];
+_plane animate ["AfterburnerR2",_AnimAfterburner];
+
+?(abs speed _plane < 2150): _plane setVelocity [(_Velx)+(sin _dir*_speed),(_Velz)+(cos _dir*_speed),(_Vely)]
+goto "CheckPos"
+
+#Exit
+~0.1
+_plane animate ["AfterburnerL",0];
+_plane animate ["AfterburnerR",0];
+_plane animate ["AfterburnerL2",0];
+_plane animate ["AfterburnerR2",0];
+
+exit
