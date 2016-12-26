@@ -281,7 +281,7 @@ class CfgVehicles
 		driverIsCommander = 1;
 		gunnerAction = "pilot"
 		gunnerOpticsColor[] = {1, 1, 1, 1};
-		flyInHeight=400;
+		flyInHeight=200;
 		Icon = "\tu144d\icons\icon.paa";
 		picture = "\tu144d\icons\picture.paa";
 		mapSize = 50;
@@ -350,8 +350,8 @@ class CfgVehicles
 		        magazines[]={};
 				castGunnerShadow = 1;
 				viewGunnerShadow = 1;
-				gunnerAction = "Pilot";
-				gunnerInAction = "Pilot";
+				gunnerAction = "c130_Pilot";
+				gunnerInAction = "c130_Pilot";
 			};
 		};
 
